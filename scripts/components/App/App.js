@@ -1,13 +1,22 @@
-class App {
+import Table from '../Table/Table.js';
+import {dataService} from '../services/DataServuce.js';
+
+export default class App {
   constructor({element}) {
     this._el = element;
-
     this._render();
+
+    this._data = dataService.getCurrencies();
+
     this._initTable();
+
   }
 
   _initTable() {
-    new Table({element: this._el.querySelector('[data-element="table"]')})
+   this._table = new Table({
+     element: this._el.querySelector('[data-element="table"]'),
+     data: this._data,
+     })
   }
 
   _render() {
