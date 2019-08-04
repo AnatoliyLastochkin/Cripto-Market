@@ -1,7 +1,8 @@
-class Table {
-  constructor({element}) {
+export default class Table {
+  constructor({element, data}) {
     this._el = element;
-
+    this._data = data;
+    console.log(this._data);
     this._render()
   }
 
@@ -16,7 +17,17 @@ class Table {
               <th>Price</th>
           </tr>
         </thead>
-        <tbody></tbody>
+        <tbody>
+          ${this._data.map(item => `
+            <tr>  
+              <td>${item.name}</td>
+              <td>${item.symbol}</td>
+              <td>${item.rank}</td>
+              <td>${item.price}</td>
+            </tr>
+          `).join('')}
+          
+        </tbody>
       </table>
     `;
   }
