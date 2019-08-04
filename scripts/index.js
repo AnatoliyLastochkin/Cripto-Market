@@ -1,1 +1,1 @@
-new App({element: document.querySelector('.app')});
+new App({element: document.getElementById('app')});
