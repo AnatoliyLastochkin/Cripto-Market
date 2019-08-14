@@ -42,7 +42,13 @@ export default class App {
     });
 
     this._tradeWidget.on('buy', evt => {
-      console.log(evt.detail);
+      const {item, amount} = evt.detail;
+
+      const purchasePrice = item.price * amount;
+      this._userBalance -= purchasePrice;
+
+      this._portfolio.addItem(item, amount);
+      this._portfolio.updateBalance(this._userBalance);
     })
   }
 
