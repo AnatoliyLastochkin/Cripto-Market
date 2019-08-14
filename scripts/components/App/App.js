@@ -1,34 +1,66 @@
 import Table from '../Table/Table.js';
+import Portfolio from '../Portfolio/Portfolio.js'
+import TradeWidget from '../TradeWidget/TradeWidget.js'
 import {dataService} from '../services/DataServuce.js';
 
 export default class App {
   constructor({element}) {
     this._el = element;
+    this._userBalance = 10000;
     this._render();
 
     this._data = dataService.getCurrencies();
-
     this._initTable();
+    this._initPortfolio();
+    this._initTradeWidget();
+  }
 
+  _tradeItem(id) {
+    const coin = this._data.find(coin => coin.id === id);
+    this._tradeWidget.trade(coin);
   }
 
   _initTable() {
    this._table = new Table({
      element: this._el.querySelector('[data-element="table"]'),
      data: this._data,
-     })
+     });
+
+    this._table.on('rowClick', evt => this._tradeItem(evt.detail))
+  }
+
+  _initPortfolio() {
+    this._portfolio = new Portfolio({
+      element: this._el.querySelector('[data-element="portfolio"]'),
+      balance: this._userBalance,
+    });
+  }
+
+  _initTradeWidget() {
+    this._tradeWidget = new TradeWidget({
+      element: this._el.querySelector('[data-element="portfolio"]'),
+    });
+
+    this._tradeWidget.on('buy', evt => {
+      console.log(evt.detail);
+    })
   }
 
   _render() {
     this._el.innerHTML = `
+      
       <div class="row">
         <div class="col s12">
-          <h1>Tiny Crypto Market</h1>
+          <h1 class="title">Tiny Crypto Market</h1>
         </div>
       </div>
+      
       <div class="row">
         <div class="col s12" data-element="table"></div>
       </div>
+      
+      <div class="col s6 offset-s6 portfolio" data-element="portfolio"></div>
+      <div data-element="tradeWidget"></div>
     `;
   }
 }
