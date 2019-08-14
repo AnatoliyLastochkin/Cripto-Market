@@ -1,6 +1,3 @@
-html, body {
-    height: 100%;
-}
 
 #app {
     display: flex;
@@ -8,9 +5,15 @@ html, body {
     flex-direction: column;
     justify-content: flex-end;
 }
-
+.container {
+    position: relative;
+}
 .row {
     width: 100%;
+}
+
+.title {
+    margin-top: 150px;
 }
 
 tr td {
@@ -31,4 +34,10 @@ tr td {
 
 form, form > div {
     padding-left: 0 !important;
+}
+
+[data-element="portfolio"] {
+    position: absolute;
+    top: 30px;
+    right: 30px;
 }
