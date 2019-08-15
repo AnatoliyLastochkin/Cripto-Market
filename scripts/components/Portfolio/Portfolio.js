@@ -33,7 +33,6 @@ export default class Portfolio {
 
   _render() {
     const items = Object.values(this._items);
-    console.log(items);
     this._el.innerHTML = `
       <ul class="collapsible portfolio">
         <li>

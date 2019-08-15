@@ -1,6 +1,6 @@
 export default class Component  {
   constructor(element) {
-    this.element = element;
+    this._el = element;
 
   }
 

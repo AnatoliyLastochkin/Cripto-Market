@@ -9,11 +9,16 @@ export default class App {
     this._userBalance = 10000;
     this._render();
 
-    this._data = dataService.getCurrencies();
-    this._initTable();
+    dataService.getCurrencies(data => {
+      this._data = data;
+      this._initTable();
+    });
+
     this._initPortfolio();
     this._initTradeWidget();
   }
+
+
 
   _tradeItem(id) {
     const coin = this._data.find(coin => coin.id === id);
