@@ -5,10 +5,19 @@ export default class TradeWidget extends Component {
     super();
     this._el = element;
 
+    this._el.addEventListener('keydown', evt => {
+      if (!evt.target.closest('#amount')) return;
+
+      const { key } = evt;
+      if (!isNumeric(key) && key !== 'Backspace' && key !== '.') {
+        evt.preventDefault();
+      }
+    });
+
     this._el.addEventListener('input', evt => {
       const value = +evt.target.value;
       this._updateDisplay(value);
-    })
+    });
 
     this._el.addEventListener('click', evt => {
       evt.preventDefault();
@@ -70,3 +79,8 @@ export default class TradeWidget extends Component {
 
   }
 }
+
+function isNumeric(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n)
+}
+

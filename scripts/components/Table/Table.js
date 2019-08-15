@@ -40,7 +40,7 @@ export default class Table extends Component {
               <td>${item.name}</td>
               <td>${item.symbol}</td>
               <td>${item.rank}</td>
-              <td>${item.price}</td>
+              <td>${item.price.toFixed(2)}</td>
             </tr>
           `).join('')}
           

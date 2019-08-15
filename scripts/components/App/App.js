@@ -9,11 +9,16 @@ export default class App {
     this._userBalance = 10000;
     this._render();
 
-    this._data = dataService.getCurrencies();
-    this._initTable();
+    dataService.getCurrencies(data => {
+      this._data = data;
+      this._initTable();
+    });
+
     this._initPortfolio();
     this._initTradeWidget();
   }
+
+
 
   _tradeItem(id) {
     const coin = this._data.find(coin => coin.id === id);
@@ -42,7 +47,13 @@ export default class App {
     });
 
     this._tradeWidget.on('buy', evt => {
-      console.log(evt.detail);
+      const {item, amount} = evt.detail;
+
+      const purchasePrice = item.price * amount;
+      this._userBalance -= purchasePrice;
+
+      this._portfolio.addItem(item, amount);
+      this._portfolio.updateBalance(this._userBalance);
     })
   }
 
