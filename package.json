@@ -1,0 +1,20 @@
+{
+  "name": "js20190613",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnatoliyLastochkin/js20190613.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AnatoliyLastochkin/js20190613/issues"
+  },
+  "homepage": "https://github.com/AnatoliyLastochkin/js20190613#readme"
+}
