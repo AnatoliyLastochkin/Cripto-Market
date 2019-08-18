@@ -1,4 +1,4 @@
-import Component from '../Component/Component.js'
+import Component from '../Component/Component.js';
 
 export default class Table extends Component {
   constructor({element, data }) {
@@ -21,6 +21,10 @@ export default class Table extends Component {
       });
       this._el.dispatchEvent(clickEvent)
     }
+  }
+
+  update(data) {
+    this._render(data)
   }
 
   _render(data) {

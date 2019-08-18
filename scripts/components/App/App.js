@@ -1,7 +1,8 @@
+import Filter from '../Filter/Filter.js';
 import Table from '../Table/Table.js';
-import Portfolio from '../Portfolio/Portfolio.js'
-import TradeWidget from '../TradeWidget/TradeWidget.js'
-import {dataService} from '../services/DataServuce.js';
+import Portfolio from '../Portfolio/Portfolio.js';
+import TradeWidget from '../TradeWidget/TradeWidget.js';
+import {dataService} from '../Services/DataServuce.js';
 
 export default class App {
   constructor({element}) {
@@ -9,16 +10,15 @@ export default class App {
     this._userBalance = 10000;
     this._render();
 
-    dataService.getCurrencies(data => {
+    dataService.getCurrencies().then(data => {
       this._data = data;
       this._initTable();
+      this._initFilter();
     });
 
     this._initPortfolio();
     this._initTradeWidget();
   }
-
-
 
   _tradeItem(id) {
     const coin = this._data.find(coin => coin.id === id);
@@ -32,6 +32,20 @@ export default class App {
      });
 
     this._table.on('rowClick', evt => this._tradeItem(evt.detail))
+  }
+
+  _initFilter() {
+    this._filter = new Filter({
+      element: this._el.querySelector('[data-element="filter"]')
+    });
+
+    this._filter.on('filter', evt => {
+      const filterValue = evt.detail;
+      dataService.getCurrencies({ filter: filterValue })
+        .then(data => {
+          this._table.update(data);
+        })
+    })
   }
 
   _initPortfolio() {
@@ -64,6 +78,10 @@ export default class App {
         <div class="col s12">
           <h1 class="title">Tiny Crypto Market</h1>
         </div>
+      </div>
+      
+      <div class="row">
+        <div class="col s12" data-element="filter"></div>
       </div>
       
       <div class="row">
