@@ -10,6 +10,7 @@ export default class App {
     this._userBalance = 10000;
     this._render();
 
+
     dataService.getCurrencies().then(data => {
       this._data = data;
       this._initTable();
@@ -39,12 +40,10 @@ export default class App {
       element: this._el.querySelector('[data-element="filter"]')
     });
 
-    this._filter.on('filter', evt => {
+    this._filter.on('filter', async evt => {
       const filterValue = evt.detail;
-      dataService.getCurrencies({ filter: filterValue })
-        .then(data => {
-          this._table.update(data);
-        })
+      const filterdData = await dataService.getCurrencies({ filter: filterValue })
+      this._table.update(filterdData)
     })
   }
 
