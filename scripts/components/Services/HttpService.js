@@ -1,26 +1,27 @@
 export const HTTPService = {
   sendRequest(url) {
-    return new Promise((resolve, reject) => {
-      const xhr = new XMLHttpRequest();
-
-      xhr.open('GET', url);
-
-      xhr.send();
-
-      xhr.onload = () => {
-        if (xhr.status !== 200) {
-          reject(new Error(xhr.statusText));
-          return;
-        } else {
-          let responseData = JSON.parse(xhr.responseText);
-          resolve(responseData)
-        }
-      };
-
-      xhr.onerror = () => {
-        reject(xhr.statusText);
-      }
-    });
+    return fetch(url).then(res => res.json())
+    // return new Promise((resolve, reject) => {
+    //   const xhr = new XMLHttpRequest();
+    //
+    //   xhr.open('GET', url);
+    //
+    //   xhr.send();
+    //
+    //   xhr.onload = () => {
+    //     if (xhr.status !== 200) {
+    //       reject(new Error(xhr.statusText));
+    //       return;
+    //     } else {
+    //       let responseData = JSON.parse(xhr.responseText);
+    //       resolve(responseData)
+    //     }
+    //   };
+    //
+    //   xhr.onerror = () => {
+    //     reject(xhr.statusText);
+    //   }
+    // });
 
   },
 
