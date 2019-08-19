@@ -4,6 +4,8 @@ import Portfolio from '../Portfolio/Portfolio.js';
 import TradeWidget from '../TradeWidget/TradeWidget.js';
 import {dataService} from '../Services/DataServuce.js';
 
+import './App.css';
+
 export default class App {
   constructor({element}) {
     this._el = element;
@@ -92,3 +94,4 @@ export default class App {
     `;
   }
 }
+
