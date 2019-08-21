@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const isDevBuild = process.env.NODE_ENV === 'development';
+
 module.exports = {
   mode: isDevBuild ? 'none' : 'production',
   entry: './scripts/index.js',
